@@ -30,21 +30,40 @@
 
   <div class="container mt-5">
     <h3>Login</h3>
-    <form class="needs-validation" novalidate method="get" action="success.html">
-  <div class="mb-3">
-    <label for="username" class="form-label">Username</label>
-    <input type="text" class="form-control" id="username" required>
-    <div class="invalid-feedback">Please enter your username.</div>
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" required>
-    <div class="invalid-feedback">Please enter your password.</div>
-  </div>
-  <button class="btn btn-primary" type="submit">Login</button>
-</form>
+    <form id="loginForm" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" required>
+        <div class="invalid-feedback">Please enter your username.</div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" required>
+        <div class="invalid-feedback">Please enter your password.</div>
+      </div>
+      <button class="btn btn-primary" type="submit">Login</button>
+    </form>
   </div>
 
-  <script src="js/scripts.js"></script>
+  <!-- JavaScript для обработки формы -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var form = document.getElementById('loginForm');
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();  // Предотвращаем стандартное поведение отправки формы
+
+        // Валидация формы
+        if (!form.checkValidity()) {
+          event.stopPropagation();
+          form.classList.add('was-validated');
+        } else {
+          // Сохраняем флаг успешного входа в localStorage
+          localStorage.setItem('loginSuccess', 'true');
+          // Перенаправляем на главную страницу
+          window.location.href = 'index.html';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
